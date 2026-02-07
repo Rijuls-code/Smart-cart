@@ -7,8 +7,9 @@ export const config = {
   jwtSecret: process.env.JWT_SECRET || 'dev-secret',
   qrSecret: process.env.QR_SECRET || 'qr-secret',
   qrExpirySeconds: Number(process.env.QR_EXPIRY_SECONDS || 300),
-  geminiApiKey: process.env.GEMINI_API_KEY || 'Add your API Key',
+  geminiApiKey: process.env.GEMINI_API_KEY || 'Your_API_Key',
   geminiModel: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
   geminiEndpoint: process.env.GEMINI_ENDPOINT || 'https://generativelanguage.googleapis.com/v1beta/models'
 };
+
 
