@@ -1,0 +1,17 @@
+{
+  "name": "hackthon-gd",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/web",
+    "apps/user",
+    "services/api",
+    "packages/shared"
+  ],
+  "scripts": {
+    "dev:web": "cd apps/web && npm run dev",
+    "dev:user": "cd apps/user && npm run dev",
+    "dev:api": "cd services/api && npm run dev",
+    "lint": "echo 'add linters per package'"
+  }
+}

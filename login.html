@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCart | Self-Checkout</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="wrapper" id="wrapper">
+        <div class="form-box">
+            
+            <form class="login-container" id="loginForm">
+                <div class="logo">🛒 Smart<span>Cart</span></div>
+                <header>Welcome Back</header>
+                <p class="subtitle">Scan, Pay, and Go.</p>
+
+                <div class="input-group">
+                    <input type="text" class="input-field" placeholder="Username/Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" class="input-field" placeholder="Password" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Sign In</button>
+                
+                <div class="footer-link">
+                    <span>New to SmartCart? <a href="#" id="toRegister">Create Account</a></span>
+                </div>
+            </form>
+
+            <form class="register-container" id="regForm">
+                <div class="logo">🛒 Smart<span>Cart</span></div>
+                <header>Join the Future</header>
+                <p class="subtitle">Start your smart shopping journey.</p>
+
+                <div class="input-group">
+                    <input type="text" class="input-field" placeholder="Full Name" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" class="input-field" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" class="input-field" placeholder="Create Password" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Register</button>
+                
+                <div class="footer-link">
+                    <span>Already a member? <a href="#" id="toLogin">Login Now</a></span>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        // 1. Elements Selection
+        const wrapper = document.getElementById('wrapper');
+        const loginForm = document.getElementById('loginForm');
+        const regForm = document.getElementById('regForm');
+        const toRegister = document.getElementById('toRegister');
+        const toLogin = document.getElementById('toLogin');
+
+        // 2. Switcher Logic
+        toRegister.onclick = (e) => {
+            e.preventDefault();
+            wrapper.classList.add('active');
+        };
+
+        toLogin.onclick = (e) => {
+            e.preventDefault();
+            wrapper.classList.remove('active');
+        };
+
+        // 3. Fixed Admin Credentials
+        const ADMIN_EMAIL = "admin@smartcart.com";
+        const ADMIN_PASS = "admin786";
+
+        // 4. Fake DB
+        let users = []; 
+
+        // 5. Registration Logic
+        regForm.onsubmit = (e) => {
+            e.preventDefault();
+            const inputs = regForm.querySelectorAll('input');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const pass = inputs[2].value;
+
+            if (users.find(u => u.email === email)) {
+                alert("User already exists!");
+                return;
+            }
+
+            users.push({ name, email, pass });
+            alert("Registration Successful! Now Login.");
+            wrapper.classList.remove('active');
+            regForm.reset();
+        };
+
+        // 6. Login Logic
+        loginForm.onsubmit = (e) => {
+            e.preventDefault();
+            const inputs = loginForm.querySelectorAll('input');
+            const email = inputs[0].value;
+            const pass = inputs[1].value;
+
+            // Check for Admin
+            if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
+                alert("Admin Access Granted!");
+                window.location.href = "admin.html"; 
+                return;
+            }
+
+            // Check for User
+            const user = users.find(u => u.email === email && u.pass === pass);
+            if (user) {
+                alert(`Welcome, ${user.name}!`);
+                window.location.href = "User.html";
+            } else {
+                alert("Invalid Credentials! Try admin@smartcart.com / admin786");
+            }
+        };
+    </script>
+</body>
+</html>
